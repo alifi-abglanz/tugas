@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klik Counter - Dengan Data</title>
+    <style>
+        /* CSS minimal, sama seperti sebelumnya */
+        body { font-family: sans-serif; padding: 20px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <h2>Click me!</h2>
+
+    <p id="counterDisplay">You have clicked the button 0 time(s) in this session.</p>
+
+    <button id="clickButton">Click me!</button>
+
+    <p>Click the button to see the counter increase.</p>
+    <p>Close the browser tab (or window), and try again, and the counter is reset.</p>
+
+    <script>
+        // Logika yang sama persis dengan Kode 1
+        const button = document.getElementById('clickButton');
+        const display = document.getElementById('counterDisplay');
+
+        let clickCount = sessionStorage.getItem('clickCount');
+
+        if (clickCount === null) {
+            clickCount = 0;
+        } else {
+            clickCount = parseInt(clickCount, 10);
+        }
+
+        display.textContent = `You have clicked the button ${clickCount} time(s) in this session.`;
+
+        button.addEventListener('click', function() {
+            clickCount++;
+            sessionStorage.setItem('clickCount', clickCount);
+            display.textContent = `You have clicked the button ${clickCount} time(s) in this session.`;
+        });
+    </script>
+
+</body>
+</html>
