@@ -4,12 +4,10 @@
 
 quiz :
 
-week3 :
+week3 :https://github.com/alifi-abglanz/tugas/blob/main/week3/index.html
 
 Tugas 2:https://github.com/alifi-abglanz/tugas/tree/main/tugas2
 
-Tugas 3:https://github.com/alifi-abglanz/tugas/blob/main/week3/index.html
-
-
+Tugas 3:https://github.com/alifi-abglanz/tugas/blob/main/tugas3/index.html
 
 
