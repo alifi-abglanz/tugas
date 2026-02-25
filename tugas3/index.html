@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preferensi Warna</title>
+  <style>
+    /*saya mengerjakan tugas ini sendiri tanpa melakukan kecurangan seperti menggunakan, mendupliaksi kode perogram kode program yang ada. jia saya melakukan kecurangan dalam perngerjaan tugas ini maka saya siap menerima sanksi atau hukuman dari dari dosen mata kuliah dan Allah  swt*/
+    :root {
+      --app-bg: #3c69a8;
+      --app-text: #d40000;
+      --border: #b8c8dd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Times New Roman", serif;
+      background: var(--app-bg);
+      color: var(--app-text);
+    }
+
+    .app {
+      margin: 0;
+      padding: 10px;
+      background: var(--app-bg);
+      min-height: 100vh;
+      border-top: 4px solid #2d5590;
+    }
+
+    h1 {
+      margin: 6px 0 14px;
+      font-size: 52px;
+      line-height: 1;
+      color: var(--app-text);
+    }
+
+    fieldset {
+      border: 2px solid var(--border);
+      padding: 16px 18px 20px;
+      margin: 0 0 8px;
+      min-height: 116px;
+    }
+
+    legend {
+      padding: 0 6px;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--app-text);
+    }
+
+    ol {
+      margin: 12px 0 0 28px;
+      padding: 0;
+      font-size: 38px;
+      line-height: 1.5;
+      color: var(--app-text);
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .swatch-btn {
+      width: 58px;
+      height: 32px;
+      border: 4px solid #d9d9d9;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 0;
+      box-shadow: inset 0 0 0 1px #8a8a8a;
+      background: #fff;
+    }
+
+    #bgSwatch {
+      background: var(--app-bg);
+    }
+
+    #textSwatch {
+      background: var(--app-text);
+    }
+
+    .save-btn {
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      color: #444;
+      padding: 3px 10px;
+      border: 1px solid #a2a2a2;
+      border-radius: 4px;
+      background: linear-gradient(#ffffff, #e6e6e6);
+      cursor: pointer;
+    }
+
+    .picker {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 760px) {
+      h1 {
+        font-size: 42px;
+      }
+
+      legend,
+      ol {
+        font-size: 30px;
+      }
+
+      .save-btn {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <h1>Preferensi Warna</h1>
+
+    <fieldset>
+      <legend>Warna</legend>
+      <ol>
+        <li>
+          <span>Warna latarbelakang</span>
+          <button id="bgSwatch" class="swatch-btn" type="button" aria-label="Pilih warna latar belakang"></button>
+        </li>
+        <li>
+          <span>Warna teks</span>
+          <button id="textSwatch" class="swatch-btn" type="button" aria-label="Pilih warna teks"></button>
+        </li>
+      </ol>
+    </fieldset>
+
+    <button id="saveBtn" class="save-btn" type="button">Simpan</button>
+
+    <input id="bgPicker" class="picker" type="color" value="#3c69a8" />
+    <input id="textPicker" class="picker" type="color" value="#d40000" />
+  </main>
+
+  <script>
+    const app = document.getElementById("app");
+    const bgSwatch = document.getElementById("bgSwatch");
+    const textSwatch = document.getElementById("textSwatch");
+    const bgPicker = document.getElementById("bgPicker");
+    const textPicker = document.getElementById("textPicker");
+    const saveBtn = document.getElementById("saveBtn");
+
+    let pendingBg = bgPicker.value;
+    let pendingText = textPicker.value;
+
+    function updateSwatches() {
+      bgSwatch.style.backgroundColor = pendingBg;
+      textSwatch.style.backgroundColor = pendingText;
+    }
+
+    bgSwatch.addEventListener("click", () => bgPicker.click());
+    textSwatch.addEventListener("click", () => textPicker.click());
+
+    bgPicker.addEventListener("input", (e) => {
+      pendingBg = e.target.value;
+      updateSwatches();
+    });
+
+    textPicker.addEventListener("input", (e) => {
+      pendingText = e.target.value;
+      updateSwatches();
+    });
+
+    saveBtn.addEventListener("click", () => {
+      document.body.style.backgroundColor = pendingBg;
+      app.style.backgroundColor = pendingBg;
+      app.style.color = pendingText;
+
+      const textTargets = app.querySelectorAll("h1, legend, ol, span, li");
+      textTargets.forEach((el) => {
+        el.style.color = pendingText;
+      });
+    });
+
+    updateSwatches();
+  </script>
+</body>
+</html>
