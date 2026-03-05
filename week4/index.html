@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Program Garis Hidup</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- HEADER IMAGE -->
+      <div class="header">
+        <div class="header-grid">
+          <img src="itenas_cover.jfif" />
+          <img src="itenas_cover.jfif" />
+          <img src="itenas_cover.jfif" />
+          <img src="itenas_cover.jfif" />
+          <img src="itenas_cover.jfif" />
+          <img src="itenas_cover.jfif" />
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- SIDEBAR -->
+
+        <!-- MAIN -->
+        <div class="main">
+          <h2>Program Garis Hidup Tanggal Lahir</h2>
+
+          <p>
+            Program ini digunakan untuk mengetahui karakter berdasarkan tanggal
+            lahir. Semua angka dari tanggal lahir dijumlahkan sampai menjadi
+            satu digit (1-9).
+          </p>
+
+          <h3>Ayo Cari Tahu Kepribadian Kamu!</h3>
+
+          <form id="formGarisHidup">
+            <label>Tanggal</label>
+            <select id="tanggal"></select>
+
+            <label>Bulan</label>
+            <select id="bulan"></select>
+
+            <label>Tahun</label>
+            <select id="tahun"></select>
+
+            <br /><br />
+            <button type="submit">kirim</button>
+            <button type="reset">reset</button>
+          </form>
+
+          <hr />
+
+          <h3>Output</h3>
+
+          <div class="output">
+            <p>Tanggal : <span id="outTgl"></span></p>
+            <p>Bulan : <span id="outBln"></span></p>
+            <p>Tahun : <span id="outThn"></span></p>
+            <p>Hasil 1 : <span id="hasil1"></span></p>
+            <p>Hasil 2 : <span id="hasil2"></span></p>
+            <p>Hasil Akhir : <span id="hasilAkhir"></span></p>
+          </div>
+
+          <div id="deskripsi"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        280224 <br />
+        Sistem Informasi | ITENAS 2024
+      </div>
+    </div>
+
+    <script>
+      const tanggalSelect = document.getElementById("tanggal");
+      const bulanSelect = document.getElementById("bulan");
+      const tahunSelect = document.getElementById("tahun");
+
+      for (let i = 1; i <= 31; i++) {
+        tanggalSelect.innerHTML += `<option value="${i}">${i}</option>`;
+      }
+
+      const bulanNama = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+      ];
+
+      bulanNama.forEach((b, i) => {
+        bulanSelect.innerHTML += `<option value="${i + 1}">${b}</option>`;
+      });
+
+      for (let i = 1950; i <= 2025; i++) {
+        tahunSelect.innerHTML += `<option value="${i}">${i}</option>`;
+      }
+
+      document
+        .getElementById("formGarisHidup")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          let t = parseInt(tanggalSelect.value);
+          let b = parseInt(bulanSelect.value);
+          let th = parseInt(tahunSelect.value);
+
+          document.getElementById("outTgl").innerText = t;
+          document.getElementById("outBln").innerText = b;
+          document.getElementById("outThn").innerText = th;
+
+          let total = t + b + th;
+
+          document.getElementById("hasil1").innerText = total;
+
+          function sumDigit(num) {
+            return num
+              .toString()
+              .split("")
+              .reduce((a, b) => a + parseInt(b), 0);
+          }
+
+          let hasil2 = sumDigit(total);
+          document.getElementById("hasil2").innerText = hasil2;
+
+          let final = hasil2;
+          while (final > 9) {
+            final = sumDigit(final);
+          }
+
+          document.getElementById("hasilAkhir").innerText = final;
+
+          const arti = {
+            1: `Garis Hidup 1 melambangkan jiwa kepemimpinan yang sangat kuat. 
+Orang dengan angka ini memiliki karakter mandiri, tegas, dan percaya diri dalam mengambil keputusan. 
+Sejak kecil biasanya sudah menunjukkan sikap dominan, berani berbicara, dan tidak takut tampil di depan. 
+Mereka memiliki dorongan alami untuk menjadi pelopor, pencipta, dan pengarah dalam suatu kelompok. 
+Dalam dunia kerja, mereka cenderung ingin memiliki kendali dan tidak nyaman jika terlalu diatur.
+
+Ambisi menjadi bahan bakar utama dalam hidupnya. Mereka memiliki visi besar dan ingin mencapai sesuatu yang nyata. 
+Namun, tantangan terbesar mereka adalah mengendalikan ego. Jika tidak seimbang, mereka bisa terlihat keras kepala, terlalu dominan, atau kurang mau mendengar pendapat orang lain. 
+Ketika mampu mengelola emosi dan belajar bekerja sama, mereka bisa menjadi pemimpin hebat yang dihormati dan disegani.`,
+
+            2: `Garis Hidup 2 menggambarkan pribadi yang lembut, sensitif, dan penuh empati. 
+Mereka sangat peka terhadap perasaan orang lain dan memiliki kemampuan alami dalam membangun hubungan yang harmonis. 
+Orang dengan angka ini biasanya tidak suka konflik dan lebih memilih mencari jalan tengah. 
+Mereka adalah pendengar yang baik dan sering menjadi tempat curhat bagi teman-temannya.
+
+Kekuatan utama mereka terletak pada kemampuan bekerja sama dan menjaga keseimbangan. 
+Namun karena terlalu peka, mereka mudah merasa tersinggung atau kecewa jika tidak dihargai. 
+Tantangan hidupnya adalah belajar lebih tegas dan tidak selalu mengalah. 
+Jika mampu membangun kepercayaan diri, mereka bisa menjadi penyeimbang yang sangat berharga dalam kehidupan sosial maupun profesional.`,
+
+            3: `Garis Hidup 3 melambangkan kreativitas, ekspresi, dan komunikasi. 
+Mereka memiliki bakat alami dalam berbicara, menulis, atau mengekspresikan ide secara menarik. 
+Kepribadiannya cenderung ceria, optimis, dan mudah bergaul. 
+Banyak orang merasa nyaman berada di dekat mereka karena energi positif yang dipancarkan.
+
+Mereka sering tertarik pada dunia seni, hiburan, media, atau bidang kreatif lainnya. 
+Namun sifat mudah bosan dan kurang fokus bisa menjadi hambatan. 
+Jika mampu melatih konsistensi dan disiplin, potensi kesuksesan mereka sangat besar. 
+Kunci hidup angka 3 adalah menjaga keseimbangan antara kesenangan dan tanggung jawab.`,
+
+            4: `Garis Hidup 4 adalah simbol kerja keras, stabilitas, dan ketekunan. 
+Orang dengan angka ini sangat menghargai struktur, aturan, dan perencanaan. 
+Mereka tidak suka hal yang terlalu spontan atau tidak pasti. 
+Dalam bekerja, mereka dikenal disiplin dan dapat diandalkan.
+
+Keamanan dan kestabilan menjadi prioritas utama dalam hidupnya. 
+Namun terkadang mereka bisa terlalu kaku dan sulit menerima perubahan. 
+Tantangan terbesar mereka adalah belajar lebih fleksibel dan terbuka terhadap ide baru. 
+Jika mampu menyeimbangkan logika dan kreativitas, mereka akan menjadi fondasi kuat dalam setiap organisasi atau keluarga.`,
+
+            5: `Garis Hidup 5 melambangkan kebebasan, petualangan, dan perubahan. 
+Mereka tidak suka rutinitas yang monoton dan selalu mencari pengalaman baru. 
+Rasa ingin tahu yang tinggi membuat mereka cepat belajar dan mudah beradaptasi. 
+Mereka juga memiliki energi besar dan semangat eksplorasi.
+
+Namun sifat impulsif bisa membawa risiko jika tidak dikendalikan. 
+Mereka perlu belajar konsistensi dan komitmen dalam jangka panjang. 
+Jika mampu mengarahkan energi ke tujuan yang jelas, angka 5 bisa mencapai kesuksesan besar melalui kreativitas dan keberanian mengambil peluang.`,
+
+            6: `Garis Hidup 6 identik dengan tanggung jawab, cinta, dan kepedulian terhadap keluarga. 
+Orang dengan angka ini memiliki naluri melindungi dan merawat yang sangat kuat. 
+Mereka sering menjadi penolong tanpa pamrih dan mengutamakan keharmonisan dalam hubungan.
+
+Namun karena terlalu peduli, mereka bisa merasa terbebani oleh masalah orang lain. 
+Tantangannya adalah belajar mengatakan tidak dan menjaga keseimbangan antara membantu orang lain dan menjaga diri sendiri. 
+Jika mampu mengelola batasan dengan baik, mereka akan menjadi pribadi yang sangat dihormati dan dicintai.`,
+
+            7: `Garis Hidup 7 menggambarkan pribadi yang analitis, introspektif, dan spiritual. 
+Mereka senang mencari makna hidup dan tertarik pada hal-hal filosofis maupun ilmiah. 
+Waktu sendiri sangat penting bagi mereka untuk merenung dan memahami diri.
+
+Namun kecenderungan menarik diri bisa membuat mereka tampak dingin atau sulit didekati. 
+Tantangannya adalah membuka diri dan berbagi pemikiran dengan orang lain. 
+Jika mampu menyeimbangkan kehidupan batin dan sosial, angka 7 bisa menjadi pribadi yang bijaksana dan inspiratif.`,
+
+            8: `Garis Hidup 8 adalah simbol kekuatan, ambisi, dan keberhasilan materi. 
+Mereka memiliki bakat alami dalam manajemen, kepemimpinan, dan pengambilan keputusan besar. 
+Fokusnya pada pencapaian dan hasil nyata.
+
+Namun ambisi besar bisa membuat mereka terlalu keras atau terlalu fokus pada materi. 
+Tantangan mereka adalah menjaga keseimbangan antara kesuksesan dan nilai kemanusiaan. 
+Jika mampu memimpin dengan integritas, mereka bisa mencapai posisi tinggi dan memberikan dampak besar.`,
+
+            9: `Garis Hidup 9 melambangkan kemanusiaan, empati, dan idealisme. 
+Mereka memiliki hati yang besar dan peduli terhadap penderitaan orang lain. 
+Sering tertarik pada kegiatan sosial, pendidikan, atau kemanusiaan.
+
+Namun sifat terlalu berkorban bisa membuat mereka kelelahan secara emosional. 
+Tantangannya adalah menjaga batas dan tidak melupakan kebutuhan pribadi. 
+Jika mampu menyeimbangkan empati dan rasionalitas, mereka akan menjadi pribadi yang sangat menginspirasi dan membawa perubahan positif bagi banyak orang.`,
+          };
+
+          document.getElementById("deskripsi").innerHTML =
+            `<h3>Tanggal Lahir Anda Berada Pada Garis Hidup ${final}</h3>
+     <p>${arti[final]}</p>`;
+        });
+    </script>
+  </body>
+</html>
