@@ -6,6 +6,8 @@ quiz :
 
 week3 :https://github.com/alifi-abglanz/tugas/blob/main/week3/index.html
 
+week4 :https://github.com/alifi-abglanz/tugas/tree/main/week4/index.html
+
 Tugas 2:https://github.com/alifi-abglanz/tugas/tree/main/tugas2
 
 Tugas 3:https://github.com/alifi-abglanz/tugas/blob/main/tugas3/index.html
